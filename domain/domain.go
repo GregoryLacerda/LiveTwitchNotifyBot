@@ -18,8 +18,8 @@ var (
 )
 
 var (
-	BotToken     = "MTI5MDUxODc1NDU2ODA0ODc1Mg.G8g1uN.NhzQbcJ_PIFbE3SzUcWWYcdf3DHdeOmM7wdM9I"
-	BotChannelId = "1290523488712392751"
+	BotToken     = "<YOUR_BOT_TOKEN>"
+	BotChannelId = "<YOUR_CHANNEL_ID>"
 )
 
 type StreamResponse struct {
