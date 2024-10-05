@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	clientID     = "oqlos1q8kicuq7a4ytr4aviogb2ef7"
-	clientSecret = "etjq5ck3ue1wye6vnzfoa9ogcudhl6"
+	clientID     = "<YOU_CLIENT_ID"
+	clientSecret = "<YOUR_Secret>"
 	Oauth2Config = &clientcredentials.Config{
 		ClientID:     clientID,
 		ClientSecret: clientSecret,
