@@ -12,6 +12,11 @@ import (
 
 func main() {
 
+	token, err := twitch.GetToken(domain.Oauth2Config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	actualGame := make(map[string]string)
 
 	sessionDisc, err := discordgo.New("Bot " + domain.BotToken)
@@ -25,18 +30,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer sessionDisc.Close()
 
 	for {
-
-		token, err := twitch.GetToken(domain.Oauth2Config)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		log.Printf("Access token: %s\n", token)
-
 		streamsResponse, err := twitch.GetStreams(token)
 		if err != nil {
 			log.Fatal(err)
@@ -48,16 +44,16 @@ func main() {
 
 		for _, stream := range streamsResponse.Data {
 
-			if stream.UserLogin == "yoda" && stream.GameName != "LeagueOfLegends" && stream.GameName != actualGame[stream.UserLogin] {
+			if stream.UserLogin == "yoda" && stream.GameName != actualGame[stream.UserLogin] {
 				sessionDisc.ChannelMessageSend(domain.BotChannelId, fmt.Sprintf("Yoda is streaming %s\n", stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
 
-			if stream.UserLogin == "gaules" && stream.GameName != "Counter-Strike: Global Offensive" && stream.GameName != actualGame[stream.UserLogin] {
+			if stream.UserLogin == "gaules" && stream.GameName != actualGame[stream.UserLogin] {
 				sessionDisc.ChannelMessageSend(domain.BotChannelId, fmt.Sprintf("Gaules is streaming %s\n", stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
-			println("end all verifications")
+			println("finished")
 		}
 
 		time.Sleep(10 * time.Minute)
