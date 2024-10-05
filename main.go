@@ -35,10 +35,11 @@ func main() {
 	for {
 		streamsResponse, err := twitch.GetStreams(token)
 		if err != nil {
+			//TODO: valid expired token to renew
 			log.Fatal(err)
 		}
 		if len(streamsResponse.Data) == 0 {
-			log.Println("No streams are live right now.")
+			log.Println("No streams in live right now.")
 			return
 		}
 
