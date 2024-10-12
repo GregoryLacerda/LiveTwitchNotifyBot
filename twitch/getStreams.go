@@ -2,12 +2,13 @@ package twitch
 
 import (
 	"encoding/json"
+	"gregorylaceda/livechangegamenotify/config"
 	"gregorylaceda/livechangegamenotify/domain"
 	"io"
 	"net/http"
 )
 
-func GetStreams(token string) (streamsRespomse domain.StreamResponse, err error) {
+func GetStreams(cfg *config.Config, token string) (streamsRespomse domain.StreamResponse, err error) {
 
 	url := "https://api.twitch.tv/helix/streams?user_login=yoda&user_login=gaules"
 
@@ -17,7 +18,7 @@ func GetStreams(token string) (streamsRespomse domain.StreamResponse, err error)
 	}
 
 	req.Header.Set("Authorization", "Bearer "+token)
-	req.Header.Set("Client-Id", domain.Oauth2Config.ClientID)
+	req.Header.Set("Client-Id", cfg.TWITCH_CLIENT_ID)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

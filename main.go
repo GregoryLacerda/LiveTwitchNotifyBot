@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gregorylaceda/livechangegamenotify/domain"
+	"gregorylaceda/livechangegamenotify/config"
 	"gregorylaceda/livechangegamenotify/twitch"
 	"log"
 	"time"
@@ -12,14 +12,19 @@ import (
 
 func main() {
 
-	token, err := twitch.GetToken(domain.Oauth2Config)
+	cfg, err := config.LoadConfig(".")
+	if err != nil {
+		panic(err)
+	}
+
+	token, err := twitch.GetToken(cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	actualGame := make(map[string]string)
 
-	sessionDisc, err := discordgo.New("Bot " + domain.BotToken)
+	sessionDisc, err := discordgo.New("Bot " + cfg.DISCORD_BOT_TOKEN)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,7 +38,7 @@ func main() {
 	defer sessionDisc.Close()
 
 	for {
-		streamsResponse, err := twitch.GetStreams(token)
+		streamsResponse, err := twitch.GetStreams(cfg, token)
 		if err != nil {
 			//TODO: valid expired token to renew
 			log.Fatal(err)
@@ -46,12 +51,12 @@ func main() {
 		for _, stream := range streamsResponse.Data {
 
 			if stream.UserLogin == "yoda" && stream.GameName != actualGame[stream.UserLogin] {
-				sessionDisc.ChannelMessageSend(domain.BotChannelId, fmt.Sprintf("Yoda is streaming %s\n", stream.GameName))
+				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("Yoda is streaming %s\n", stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
 
 			if stream.UserLogin == "gaules" && stream.GameName != actualGame[stream.UserLogin] {
-				sessionDisc.ChannelMessageSend(domain.BotChannelId, fmt.Sprintf("Gaules is streaming %s\n", stream.GameName))
+				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("Gaules is streaming %s\n", stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
 			println("finished")

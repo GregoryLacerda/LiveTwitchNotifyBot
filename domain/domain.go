@@ -2,24 +2,6 @@ package domain
 
 import (
 	"time"
-
-	"golang.org/x/oauth2/clientcredentials"
-	"golang.org/x/oauth2/twitch"
-)
-
-var (
-	clientID     = "<YOU_CLIENT_ID"
-	clientSecret = "<YOUR_Secret>"
-	Oauth2Config = &clientcredentials.Config{
-		ClientID:     clientID,
-		ClientSecret: clientSecret,
-		TokenURL:     twitch.Endpoint.TokenURL,
-	}
-)
-
-var (
-	BotToken     = "<YOUR_BOT_TOKEN>"
-	BotChannelId = "<YOUR_CHANNEL_ID>"
 )
 
 type StreamResponse struct {
