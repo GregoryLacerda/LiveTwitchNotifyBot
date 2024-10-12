@@ -50,16 +50,11 @@ func main() {
 
 		for _, stream := range streamsResponse.Data {
 
-			if stream.UserLogin == "yoda" && stream.GameName != actualGame[stream.UserLogin] {
-				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("Yoda is streaming %s\n", stream.GameName))
+			if stream.GameName != actualGame[stream.UserLogin] {
+				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("%s is streaming %s\n", stream.UserLogin, stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
-
-			if stream.UserLogin == "gaules" && stream.GameName != actualGame[stream.UserLogin] {
-				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("Gaules is streaming %s\n", stream.GameName))
-				actualGame[stream.UserLogin] = stream.GameName
-			}
-			println("finished")
+			fmt.Println("finished - "+time.Now().Format(time.RFC1123), stream.UserLogin)
 		}
 
 		time.Sleep(10 * time.Minute)
