@@ -3,10 +3,11 @@ package config
 import "github.com/spf13/viper"
 
 type Config struct {
-	TWITCH_CLIENT_ID       string `mapstructure:"TWITCH_CLIENT_ID"`
-	TWITCH_CLIENT_SECRET   string `mapstructure:"TWITCH_CLIENT_SECRET"`
-	DISCORD_BOT_TOKEN      string `mapstructure:"DISCORD_BOT_TOKEN"`
-	DISCORD_BOT_CHANNEL_ID string `mapstructure:"DISCORD_BOT_CHANNEL_ID"`
+	TWITCH_CLIENT_ID           string `mapstructure:"TWITCH_CLIENT_ID"`
+	TWITCH_CLIENT_SECRET       string `mapstructure:"TWITCH_CLIENT_SECRET"`
+	DISCORD_BOT_TOKEN          string `mapstructure:"DISCORD_BOT_TOKEN"`
+	DISCORD_BOT_CHANNEL_ID     string `mapstructure:"DISCORD_BOT_CHANNEL_ID"`
+	TWITCH_CHANNELS_TO_MONITOR string `mapstructure:"TWITCH_CHANNELS_TO_MONITOR"`
 }
 
 func LoadConfig(path string) (*Config, error) {

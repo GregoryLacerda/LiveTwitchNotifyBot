@@ -2,6 +2,7 @@ package twitch
 
 import (
 	"encoding/json"
+	"fmt"
 	"gregorylaceda/livechangegamenotify/config"
 	"gregorylaceda/livechangegamenotify/domain"
 	"io"
@@ -10,7 +11,7 @@ import (
 
 func GetStreams(cfg *config.Config, token string) (streamsRespomse domain.StreamResponse, err error) {
 
-	url := "https://api.twitch.tv/helix/streams?user_login=yoda&user_login=gaules"
+	url := fmt.Sprintf("https://api.twitch.tv/helix/streams?%s", cfg.TWITCH_CHANNELS_TO_MONITOR)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
