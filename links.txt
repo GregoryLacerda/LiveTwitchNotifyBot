@@ -7,7 +7,3 @@ https://dev.twitch.tv/docs/authentication/#app-access-tokens
 
 https://dev.twitch.tv/docs/api/reference/#get-streams
 https://dev.twitch.tv/console/apps
-
-"key":"client_id","value":"oqlos1q8kicuq7a4ytr4aviogb2ef7"
-"key":"client_secret","value":"etjq5ck3ue1wye6vnzfoa9ogcudhl6"
-"key":"grant_type","value":"client_credentials"
