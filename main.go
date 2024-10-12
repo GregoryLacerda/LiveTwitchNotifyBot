@@ -54,7 +54,7 @@ func main() {
 				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("%s is streaming %s\n", stream.UserLogin, stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
-			fmt.Println("finished - "+time.Now().Format(time.RFC1123), stream.UserLogin)
+			fmt.Printf("finished - %s - %s - %s", time.Now().Format(time.RFC1123), stream.UserLogin, stream.GameName)
 		}
 
 		time.Sleep(10 * time.Minute)
