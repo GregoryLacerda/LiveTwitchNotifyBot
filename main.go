@@ -51,6 +51,7 @@ func main() {
 		for _, stream := range streamsResponse.Data {
 
 			if stream.GameName != actualGame[stream.UserLogin] {
+				//TODO:add stream title to message
 				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("%s is streaming %s\n", stream.UserLogin, stream.GameName))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
