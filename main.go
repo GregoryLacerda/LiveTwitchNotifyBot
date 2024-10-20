@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gregorylaceda/livechangegamenotify/config"
+	"gregorylaceda/livechangegamenotify/constants"
 	"gregorylaceda/livechangegamenotify/twitch"
 	"log"
 	"time"
@@ -51,8 +52,7 @@ func main() {
 		for _, stream := range streamsResponse.Data {
 
 			if stream.GameName != actualGame[stream.UserLogin] {
-				//TODO:add stream title to message
-				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf("%s is streaming %s\n", stream.UserLogin, stream.GameName))
+				sessionDisc.ChannelMessageSend(cfg.DISCORD_BOT_CHANNEL_ID, fmt.Sprintf(constants.Message, stream.UserLogin, stream.GameName, stream.Title))
 				actualGame[stream.UserLogin] = stream.GameName
 			}
 			fmt.Printf("finished - %s - %s - %s", time.Now().Format(time.RFC1123), stream.UserLogin, stream.GameName)
